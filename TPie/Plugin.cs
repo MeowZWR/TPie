@@ -105,7 +105,7 @@ namespace TPie
                 "/tpie",
                 new CommandInfo(PluginCommand)
                 {
-                    HelpMessage = "Opens the TPie configuration window.",
+                    HelpMessage = "打开TPie设置窗口。",
 
                     ShowInHelp = true
                 }
@@ -155,17 +155,17 @@ namespace TPie
 
         private void CreateWindows()
         {
-            _settingsWindow = new SettingsWindow("TPie Settings");
-            _ringSettingsWindow = new RingSettingsWindow("Ring Settings");
-            _actionElementWindow = new ActionElementWindow("Edit Action");
-            _itemElementWindow = new ItemElementWindow("Edit Item");
-            _gearSetElementWindow = new GearSetElementWindow("Edit Gear Set");
-            _emoteElementWindow = new EmoteElementWindow("Edit Emote");
-            _commandElementWindow = new CommandElementWindow("Edit Command");
-            _gameMacroElementWindow = new GameMacroElementWindow("Edit Game Macro");
-            _nestedRingElementWindow = new NestedRingElementWindow("Edit Nested Ring");
-            _iconBrowserWindow = new IconBrowserWindow("Icon Picker");
-            _keyBindWindow = new KeyBindWindow("Edit Keybind");
+            _settingsWindow = new SettingsWindow("TPie 设置");
+            _ringSettingsWindow = new RingSettingsWindow("环 设置");
+            _actionElementWindow = new ActionElementWindow("编辑 技能");
+            _itemElementWindow = new ItemElementWindow("编辑 可使用道具");
+            _gearSetElementWindow = new GearSetElementWindow("编辑 套装");
+            _emoteElementWindow = new EmoteElementWindow("编辑 表情");
+            _commandElementWindow = new CommandElementWindow("编辑 命令");
+            _gameMacroElementWindow = new GameMacroElementWindow("编辑 游戏宏");
+            _nestedRingElementWindow = new NestedRingElementWindow("编辑 嵌套环");
+            _iconBrowserWindow = new IconBrowserWindow("图标拾取器");
+            _keyBindWindow = new KeyBindWindow("编辑 按键绑定");
 
             _windowSystem = new WindowSystem("TPie_Windows");
             _windowSystem.AddWindow(_settingsWindow);

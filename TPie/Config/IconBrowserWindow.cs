@@ -51,7 +51,7 @@ namespace TPie.Config
             }
 
             // General
-            if (ImGui.BeginTabItem("Browse ##TPie_Icon_Browse_Tab"))
+            if (ImGui.BeginTabItem("浏览 ##TPie_Icon_Browse_Tab"))
             {
                 DrawBrowseTab();
                 ImGui.EndTabItem();
@@ -69,7 +69,7 @@ namespace TPie.Config
 
         private void DrawSearchTab()
         {
-            if (ImGui.Combo("Type", ref _searchTypeIndex, _searchTypes, _searchTypes.Length))
+            if (ImGui.Combo("类型", ref _searchTypeIndex, _searchTypes, _searchTypes.Length))
             {
                 if (_searchTerm.Length <= 2)
                 {
@@ -80,7 +80,7 @@ namespace TPie.Config
                 _searchResults = new HashSet<uint>(SearchIcons());
             }
 
-            if (ImGui.InputText("Search", ref _searchTerm, 64))
+            if (ImGui.InputText("搜索", ref _searchTerm, 64))
             {
                 if (_searchTerm.Length <= 2)
                 {

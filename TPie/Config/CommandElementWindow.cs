@@ -47,13 +47,13 @@ namespace TPie.Config
 
             // name
             FocusIfNeeded();
-            if (ImGui.InputText("Name ##Command", ref _inputText, 100))
+            if (ImGui.InputText("名称 ##Command", ref _inputText, 100))
             {
                 CommandElement.Name = _inputText;
             }
 
             // command
-            if (ImGui.InputText("Command ##Command", ref _commandInputText, 100))
+            if (ImGui.InputText("命令 ##Command", ref _commandInputText, 100))
             {
                 CommandElement.Command = _commandInputText;
             }
@@ -64,7 +64,7 @@ namespace TPie.Config
             // icon id
             ImGui.PushItemWidth(154 * _scale);
             string str = _iconInputText;
-            if (ImGui.InputText("Icon ID ##Command", ref str, 100, ImGuiInputTextFlags.CharsDecimal))
+            if (ImGui.InputText("图标 ID ##Command", ref str, 100, ImGuiInputTextFlags.CharsDecimal))
             {
                 _iconInputText = Regex.Replace(str, @"[^\d]", "");
 
@@ -86,7 +86,7 @@ namespace TPie.Config
                 _iconInputText = "66001";
             }
             ImGui.PopFont();
-            DrawHelper.SetTooltip("Reset to default");
+            DrawHelper.SetTooltip("重置为默认");
 
             ImGui.SameLine();
             ImGui.PushFont(UiBuilder.IconFont);
@@ -99,7 +99,7 @@ namespace TPie.Config
                 });
             }
             ImGui.PopFont();
-            DrawHelper.SetTooltip("Search ");
+            DrawHelper.SetTooltip("搜索 ");
 
             ImGui.NewLine();
 
@@ -116,12 +116,12 @@ namespace TPie.Config
 
             // draw text
             ImGui.NewLine();
-            ImGui.Checkbox("Draw Text", ref CommandElement.DrawText);
+            ImGui.Checkbox("绘制文字  ", ref CommandElement.DrawText);
 
             if (CommandElement.DrawText)
             {
                 ImGui.SameLine();
-                ImGui.Checkbox("Only When Selected", ref CommandElement.DrawTextOnlyWhenSelected);
+                ImGui.Checkbox("仅选中时绘制", ref CommandElement.DrawTextOnlyWhenSelected);
             }
 
             // border

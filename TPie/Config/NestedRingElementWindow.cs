@@ -46,25 +46,25 @@ namespace TPie.Config
 
             // name
             FocusIfNeeded();
-            if (ImGui.InputText("Ring Name ##NestedRing", ref _inputText, 100))
+            if (ImGui.InputText("环名称 ##NestedRing", ref _inputText, 100))
             {
                 NestedRingElement.RingName = _inputText;
             }
 
             // activation time
             ImGui.PushItemWidth(182 * _scale);
-            ImGui.DragFloat("Activation Time ##NestedRing", ref NestedRingElement.ActivationTime, 0.1f, 0.2f, 5f);
-            DrawHelper.SetTooltip("Determines how many seconds the element needs to be hovered on to activate the nested ring.");
+            ImGui.DragFloat("激活时间 ##NestedRing", ref NestedRingElement.ActivationTime, 0.1f, 0.2f, 5f);
+            DrawHelper.SetTooltip("这确定了悬停在元素上需要多少秒才能激活嵌套环。");
 
             // keep center
-            ImGui.Checkbox("Keep Previous Ring Center", ref NestedRingElement.KeepCenter);
+            ImGui.Checkbox("保持在上一个环的中心", ref NestedRingElement.KeepCenter);
 
             ImGui.NewLine();
 
             // icon id
             ImGui.PushItemWidth(154 * _scale);
             string str = _iconInputText;
-            if (ImGui.InputText("Icon ID ##Command", ref str, 100, ImGuiInputTextFlags.CharsDecimal))
+            if (ImGui.InputText("图标 ID ##Command", ref str, 100, ImGuiInputTextFlags.CharsDecimal))
             {
                 _iconInputText = Regex.Replace(str, @"[^\d]", "");
 
@@ -86,7 +86,7 @@ namespace TPie.Config
                 _iconInputText = "66001";
             }
             ImGui.PopFont();
-            DrawHelper.SetTooltip("Reset to default");
+            DrawHelper.SetTooltip("重置为默认");
 
             ImGui.SameLine();
             ImGui.PushFont(UiBuilder.IconFont);
@@ -99,7 +99,7 @@ namespace TPie.Config
                 });
             }
             ImGui.PopFont();
-            DrawHelper.SetTooltip("Search ");
+            DrawHelper.SetTooltip("搜索 ");
 
             ImGui.NewLine();
 
@@ -116,7 +116,7 @@ namespace TPie.Config
 
             // draw text
             ImGui.NewLine();
-            ImGui.Checkbox("Draw Text", ref NestedRingElement.DrawText);
+            ImGui.Checkbox("绘制文字", ref NestedRingElement.DrawText);
 
             // border
             NestedRingElement.Border.Draw();

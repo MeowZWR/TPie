@@ -118,7 +118,7 @@ namespace TPie.Helpers
 
                 ImGui.NewLine();
 
-                if (ImGui.Button("OK", new Vector2(width / 2f - 5, 24)))
+                if (ImGui.Button("确定", new Vector2(width / 2f - 5, 24)))
                 {
                     ImGui.CloseCurrentPopup();
                     didConfirm = true;
@@ -127,7 +127,7 @@ namespace TPie.Helpers
 
                 ImGui.SetItemDefaultFocus();
                 ImGui.SameLine();
-                if (ImGui.Button("Cancel", new Vector2(width / 2f - 5, 24)))
+                if (ImGui.Button("取消", new Vector2(width / 2f - 5, 24)))
                 {
                     ImGui.CloseCurrentPopup();
                     didClose = true;

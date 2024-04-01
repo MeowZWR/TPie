@@ -54,13 +54,13 @@ namespace TPie.Config
             if (EmoteElement == null) return;
 
             ImGui.PushItemWidth(240 * _scale);
-            if (ImGui.InputText("Name ##Emote", ref _inputText, 100) || _needsSearch)
+            if (ImGui.InputText("名称 ##Emote", ref _inputText, 100) || _needsSearch)
             {
                 SearchEmotes(_inputText);
                 _needsSearch = false;
             }
 
-            if (ImGui.Checkbox("Acquired", ref _acquired))
+            if (ImGui.Checkbox("仅显示已获得的", ref _acquired))
             {
                 SearchEmotes(_inputText);
                 _needsSearch = false;
@@ -108,12 +108,12 @@ namespace TPie.Config
 
             // draw text
             ImGui.NewLine();
-            ImGui.Checkbox("Draw Text", ref EmoteElement.DrawText);
+            ImGui.Checkbox("绘制文字  ", ref EmoteElement.DrawText);
 
             if (EmoteElement.DrawText)
             {
                 ImGui.SameLine();
-                ImGui.Checkbox("Only When Selected", ref EmoteElement.DrawTextOnlyWhenSelected);
+                ImGui.Checkbox("仅选中时绘制", ref EmoteElement.DrawTextOnlyWhenSelected);
             }
 
             // border

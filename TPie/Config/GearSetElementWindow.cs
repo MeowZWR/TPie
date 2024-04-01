@@ -63,14 +63,14 @@ namespace TPie.Config
 
             ImGui.PushItemWidth(120 * _scale);
 
-            if (ImGui.RadioButton("Use Set Number", GearSetElement.UseID))
+            if (ImGui.RadioButton("使用套装编号", GearSetElement.UseID))
             {
                 GearSetElement.UseID = true;
                 ImGui.SetKeyboardFocusHere(0);
             }
 
             ImGui.SameLine();
-            if (ImGui.RadioButton("Use Set Name", !GearSetElement.UseID))
+            if (ImGui.RadioButton("使用套装名称", !GearSetElement.UseID))
             {
                 GearSetElement.UseID = false;
                 ImGui.SetKeyboardFocusHere(0);
@@ -82,7 +82,7 @@ namespace TPie.Config
             if (GearSetElement.UseID)
             {
                 string str = _inputText;
-                if (ImGui.InputText("Gear Set Number ##GearSet", ref str, 100, ImGuiInputTextFlags.CharsDecimal))
+                if (ImGui.InputText("套装编号 ##GearSet", ref str, 100, ImGuiInputTextFlags.CharsDecimal))
                 {
                     _inputText = Regex.Replace(str, @"[^\d]", "");
 
@@ -95,7 +95,7 @@ namespace TPie.Config
             }
             else
             {
-                if (ImGui.InputText("Gear Set Name ##GearSet", ref _nameInputText, 100))
+                if (ImGui.InputText("套装名称 ##GearSet", ref _nameInputText, 100))
                 {
                     GearSetElement.GearSetName = _nameInputText;
 
@@ -113,7 +113,7 @@ namespace TPie.Config
                 }
             }
 
-            ImGui.InputText("Job ##Gear Set", ref _jobInputText, 100);
+            ImGui.InputText("职业图标 ##Gear Set", ref _jobInputText, 100);
 
             ImGui.BeginChild("##GearSets_List", new Vector2(284 * _scale, 130 * _scale), true);
             {
@@ -144,12 +144,12 @@ namespace TPie.Config
 
             // draw text
             ImGui.NewLine();
-            ImGui.Checkbox("Draw Text", ref GearSetElement.DrawText);
+            ImGui.Checkbox("绘制文字  ", ref GearSetElement.DrawText);
 
             if (GearSetElement.DrawText)
             {
                 ImGui.SameLine();
-                ImGui.Checkbox("Only When Selected", ref GearSetElement.DrawTextOnlyWhenSelected);
+                ImGui.Checkbox("仅选中时绘制", ref GearSetElement.DrawTextOnlyWhenSelected);
             }
 
             // border

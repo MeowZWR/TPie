@@ -53,7 +53,7 @@ namespace TPie.Config
 
             // name
             FocusIfNeeded();
-            if (ImGui.InputText("Name ##GameMacro", ref _inputText, 100))
+            if (ImGui.InputText("名称 ##GameMacro", ref _inputText, 100))
             {
                 GameMacroElement.Name = _inputText;
             }
@@ -66,7 +66,7 @@ namespace TPie.Config
             }
 
             ImGui.SameLine();
-            ImGui.Checkbox("Shared", ref GameMacroElement.IsShared);
+            ImGui.Checkbox("共享", ref GameMacroElement.IsShared);
 
             ImGui.NewLine();
             ImGui.NewLine();
@@ -74,7 +74,7 @@ namespace TPie.Config
             // icon id
             ImGui.PushItemWidth(154 * _scale);
             string str = _iconInputText;
-            if (ImGui.InputText("Icon ID ##GameMacro", ref str, 100, ImGuiInputTextFlags.CharsDecimal))
+            if (ImGui.InputText("图标 ID ##GameMacro", ref str, 100, ImGuiInputTextFlags.CharsDecimal))
             {
                 _iconInputText = Regex.Replace(str, @"[^\d]", "");
 
@@ -96,7 +96,7 @@ namespace TPie.Config
                 _iconInputText = "66001";
             }
             ImGui.PopFont();
-            DrawHelper.SetTooltip("Reset to default");
+            DrawHelper.SetTooltip("重置为默认");
 
             ImGui.SameLine();
             ImGui.PushFont(UiBuilder.IconFont);
@@ -109,7 +109,7 @@ namespace TPie.Config
                 });
             }
             ImGui.PopFont();
-            DrawHelper.SetTooltip("Search ");
+            DrawHelper.SetTooltip("搜索 ");
 
             ImGui.NewLine();
 
@@ -126,12 +126,12 @@ namespace TPie.Config
 
             // draw text
             ImGui.NewLine();
-            ImGui.Checkbox("Draw Text", ref GameMacroElement.DrawText);
+            ImGui.Checkbox("绘制文字  ", ref GameMacroElement.DrawText);
 
             if (GameMacroElement.DrawText)
             {
                 ImGui.SameLine();
-                ImGui.Checkbox("Only When Selected", ref GameMacroElement.DrawTextOnlyWhenSelected);
+                ImGui.Checkbox("仅选中时绘制", ref GameMacroElement.DrawTextOnlyWhenSelected);
             }
 
             // border

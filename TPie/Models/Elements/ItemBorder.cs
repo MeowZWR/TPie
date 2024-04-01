@@ -23,9 +23,9 @@ namespace TPie.Models.Elements
         {
             ImGui.PushItemWidth(154 * ImGuiHelpers.GlobalScale);
 
-            ImGui.ColorEdit3("Border Color ##ItemBorder", ref Color);
-            ImGui.DragInt("Border Thickness ##ItemBorder", ref Thickness, 0.1f, 0, 10);
-            ImGui.DragInt("Border Radius ##ItemBorder", ref Radius, 0.1f, 0, 500);
+            ImGui.ColorEdit3("边框颜色 ##ItemBorder", ref Color);
+            ImGui.DragInt("边框厚度 ##ItemBorder", ref Thickness, 0.1f, 0, 10);
+            ImGui.DragInt("边框半径 ##ItemBorder", ref Radius, 0.1f, 0, 500);
         }
 
         public ItemBorder Clone()

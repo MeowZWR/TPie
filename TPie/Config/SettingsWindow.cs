@@ -43,7 +43,7 @@ namespace TPie.Config
 
             _animationNames = new string[]
             {
-                "None", "Spiral", "Sequential", "Fade"
+                "无动画", "螺旋", "序列", "淡入淡出"
             };
         }
 
@@ -62,21 +62,21 @@ namespace TPie.Config
             }
 
             // General
-            if (ImGui.BeginTabItem("General ##TPie_Settings"))
+            if (ImGui.BeginTabItem("常规选项 ##TPie_Settings"))
             {
                 DrawGeneralTab();
                 ImGui.EndTabItem();
             }
 
             // Global Border Settings
-            if (ImGui.BeginTabItem("Global Border Settings ##TPie_Settings"))
+            if (ImGui.BeginTabItem("全局边框设置 ##TPie_Settings"))
             {
                 DrawGlobalBorderSettingsTab();
                 ImGui.EndTabItem();
             }
 
             // Rings
-            if (ImGui.BeginTabItem("Rings ##TPie_Settings"))
+            if (ImGui.BeginTabItem("   环    ##TPie_Settings"))
             {
                 DrawRingsTab();
                 ImGui.EndTabItem();
@@ -87,7 +87,7 @@ namespace TPie.Config
             ImGui.PushStyleColor(ImGuiCol.ButtonHovered, new Vector4(255f / 255f, 94f / 255f, 91f / 255f, .85f));
 
             ImGui.SetCursorPos(new Vector2(280 * _scale, 26 * _scale));
-            if (ImGui.Button("Support on Ko-fi", new Vector2(104 * _scale, 24 * _scale)))
+            if (ImGui.Button("去Ko-fi支持作者", new Vector2(104 * _scale, 24 * _scale)))
             {
                 OpenUrl("https://ko-fi.com/Tischel");
             }
@@ -120,7 +120,7 @@ namespace TPie.Config
                 }
                 catch (Exception e)
                 {
-                    Plugin.Logger.Error("Error trying to open url: " + e.Message);
+                    Plugin.Logger.Error("打开网址时发生错误：" + e.Message);
                 }
             }
         }
@@ -128,41 +128,41 @@ namespace TPie.Config
         private void DrawGeneralTab()
         {
             // position
-            ImGui.Text("Position");
+            ImGui.Text("位置");
             ImGui.BeginChild("##Position", new Vector2(384 * _scale, 70 * _scale), true);
             {
-                if (ImGui.RadioButton("Center at Cursor", Settings.AppearAtCursor))
+                if (ImGui.RadioButton("跟随鼠标中心", Settings.AppearAtCursor))
                 {
                     Settings.AppearAtCursor = true;
                 }
 
-                if (ImGui.RadioButton("Set Position", !Settings.AppearAtCursor))
+                if (ImGui.RadioButton("固定位置", !Settings.AppearAtCursor))
                 {
                     Settings.AppearAtCursor = false;
                 }
-                DrawHelper.SetTooltip("(0,0) is the center of the screen");
+                DrawHelper.SetTooltip("(0,0) 是屏幕中心。");
 
                 if (!Settings.AppearAtCursor)
                 {
                     ImGui.SameLine();
                     ImGui.PushItemWidth(140 * _scale);
                     ImGui.DragFloat2("##Position", ref Settings.CenterPositionOffset, 0.5f, -4000, 4000);
-                    DrawHelper.SetTooltip("(0,0) is the center of the screen");
+                    DrawHelper.SetTooltip("(0,0) 是屏幕中心。");
 
                     ImGui.SameLine();
-                    ImGui.Checkbox("Center Cursor", ref Settings.AutoCenterCursor);
-                    DrawHelper.SetTooltip("Your cursor will automatically move to the center of the ring when activated.");
+                    ImGui.Checkbox("使鼠标居中", ref Settings.AutoCenterCursor);
+                    DrawHelper.SetTooltip("激活环时，鼠标将自动移到环的中心。");
                 }
             }
             ImGui.EndChild();
 
             // font
             ImGui.Spacing();
-            ImGui.Text("Font");
+            ImGui.Text("字体");
             ImGui.BeginChild("##Font", new Vector2(384 * _scale, 40 * _scale), true);
             {
-                ImGui.Checkbox("Use Custom Font", ref Settings.UseCustomFont);
-                DrawHelper.SetTooltip("Enable to use the Expressway font that comes with TPie.\nDisable to use the system font.");
+                ImGui.Checkbox("使用自定义字体", ref Settings.UseCustomFont);
+                DrawHelper.SetTooltip("启用时使用TPie自带的\"Expressway\"字体(不支持中文)。\n禁用时使用游戏字体。");
 
                 if (Settings.UseCustomFont)
                 {
@@ -172,7 +172,7 @@ namespace TPie.Config
 
                     ImGui.PushItemWidth(80 * _scale);
                     int fontIndex = Settings.FontSize - 14;
-                    if (ImGui.Combo("Size", ref fontIndex, _fontSizes, _fontSizes.Length))
+                    if (ImGui.Combo("字号", ref fontIndex, _fontSizes, _fontSizes.Length))
                     {
                         Settings.FontSize = fontIndex + 14;
                         FontsHelper.LoadFont();
@@ -183,38 +183,38 @@ namespace TPie.Config
 
             // keybinds
             ImGui.Spacing();
-            ImGui.Text("Keybinds");
+            ImGui.Text("快捷键绑定");
             ImGui.BeginChild("##Keybinds", new Vector2(384 * _scale, 40 * _scale), true);
             {
-                ImGui.Checkbox("Keybind Passthrough", ref Settings.KeybindPassthrough);
-                DrawHelper.SetTooltip("When enabled, TPie wont prevent the game from receiving a key press asssigned for a ring.");
+                ImGui.Checkbox("快捷键透传", ref Settings.KeybindPassthrough);
+                DrawHelper.SetTooltip("如果启用，TPie将不会阻止游戏接收已绑定到环的快捷键。");
 
                 ImGui.SameLine();
-                ImGui.Checkbox("Enable Quick Settings", ref Settings.EnableQuickSettings);
-                DrawHelper.SetTooltip("When enabled, double right-clicking when a ring is opened will open the settings for that ring.");
+                ImGui.Checkbox("启用快速设置", ref Settings.EnableQuickSettings);
+                DrawHelper.SetTooltip("启用后，打开环时双击鼠标右键将打开该环的设置。");
             }
             ImGui.EndChild();
 
             // style
             ImGui.Spacing();
-            ImGui.Text("Style");
+            ImGui.Text("样式");
             ImGui.BeginChild("##Style", new Vector2(384 * _scale, 70 * _scale), true);
             {
-                ImGui.Checkbox("Draw Rings Background", ref Settings.DrawRingBackground);
+                ImGui.Checkbox("绘制环背景   ", ref Settings.DrawRingBackground);
 
                 ImGui.SameLine();
-                ImGui.Checkbox("Resize Icons When Hovered", ref Settings.AnimateIconSizes);
+                ImGui.Checkbox("鼠标指向时调整图标大小", ref Settings.AnimateIconSizes);
 
-                ImGui.Checkbox("Show Cooldowns", ref Settings.ShowCooldowns);
+                ImGui.Checkbox("显示冷却数值  ", ref Settings.ShowCooldowns);
 
                 ImGui.SameLine();
-                ImGui.Checkbox("Show Remaining Item Count", ref Settings.ShowRemainingItemCount);
+                ImGui.Checkbox("显示剩余物品计数", ref Settings.ShowRemainingItemCount);
             }
             ImGui.EndChild();
 
             // animation
             ImGui.Spacing();
-            ImGui.Text("Animation");
+            ImGui.Text("动画");
             ImGui.BeginChild("##Animation", new Vector2(384 * _scale, 40 * _scale), true);
             {
                 ImGui.PushItemWidth(100 * _scale);
@@ -229,16 +229,16 @@ namespace TPie.Config
 
                 ImGui.PushItemWidth(80);
                 ImGui.SameLine();
-                ImGui.DragFloat("Duration", ref Settings.AnimationDuration, 0.1f, 0, 5);
-                DrawHelper.SetTooltip("In seconds");
+                ImGui.DragFloat("持续时间", ref Settings.AnimationDuration, 0.1f, 0, 5);
+                DrawHelper.SetTooltip("秒");
             }
             ImGui.EndChild();
         }
 
         private void DrawGlobalBorderSettingsTab()
         {
-            ImGui.Text("These are the default border settings that will be");
-            ImGui.Text("used when creating a new ring element.");
+            ImGui.Text("这些是创建新的环组件时的默认边框设置。");
+            ImGui.Text("在创建新环时使用。");
             ImGui.NewLine();
 
             ImGui.BeginChild("##GlobalBorderSettings", new Vector2(272 * _scale, 93 * _scale), true);
@@ -248,14 +248,14 @@ namespace TPie.Config
             ImGui.EndChild();
 
             ImGui.NewLine();
-            if (ImGui.Button("Apply to all existing elements", new Vector2(272, 30)))
+            if (ImGui.Button("应用到所有存在的组件", new Vector2(272, 30)))
             {
                 _applyingGlobalBorderSettings = true;
             }
 
             if (_applyingGlobalBorderSettings)
             {
-                var (didConfirm, didClose) = DrawHelper.DrawConfirmationModal("Apply?", "Are you sure you want to apply these border", "settings to all existing elements?", "There is no way to undo this!");
+                var (didConfirm, didClose) = DrawHelper.DrawConfirmationModal("应用？", "你确定要将边框设置", "应用到所有存在的组件？", "这将没有办法撤回！");
 
                 if (didConfirm)
                 {
@@ -283,7 +283,7 @@ namespace TPie.Config
             ImGui.BeginChild("##Options", new Vector2(384 * _scale, 40 * _scale), true);
             {
                 ImGui.SameLine();
-                ImGui.Text("Create New");
+                ImGui.Text("新建");
                 ImGui.SameLine();
                 ImGui.PushFont(UiBuilder.IconFont);
                 if (ImGui.Button(FontAwesomeIcon.Plus.ToIconString()))
@@ -292,10 +292,10 @@ namespace TPie.Config
                     Plugin.Settings.AddRing(newRing);
                 }
                 ImGui.PopFont();
-                DrawHelper.SetTooltip("Adds a new empty Ring");
+                DrawHelper.SetTooltip("添加一个新的空环");
 
                 ImGui.SameLine();
-                ImGui.Text("\t\t\tImport");
+                ImGui.Text("\t\t\t导入");
                 ImGui.SameLine();
                 ImGui.PushFont(UiBuilder.IconFont);
                 if (ImGui.Button(FontAwesomeIcon.Download.ToIconString()))
@@ -309,10 +309,10 @@ namespace TPie.Config
                     }
                 }
                 ImGui.PopFont();
-                DrawHelper.SetTooltip("Adds new Rings by importing them from the clipboard");
+                DrawHelper.SetTooltip("从剪贴板数据导入来添加一个新环。");
 
                 ImGui.SameLine();
-                ImGui.Text("\t\t\tExport all");
+                ImGui.Text("\t\t\t导出所有");
                 ImGui.SameLine();
                 ImGui.PushFont(UiBuilder.IconFont);
                 if (ImGui.Button(FontAwesomeIcon.Upload.ToIconString()))
@@ -321,7 +321,7 @@ namespace TPie.Config
                     ImGui.SetClipboardText(exportString);
                 }
                 ImGui.PopFont();
-                DrawHelper.SetTooltip("Exports all Rings to the clipboard");
+                DrawHelper.SetTooltip("将所有环数据导出到剪贴板");
             }
             ImGui.EndChild();
 
@@ -336,11 +336,11 @@ namespace TPie.Config
             // rings
             if (ImGui.BeginTable("##Rings_Table", 5, flags, new Vector2(384 * _scale, 354 * _scale)))
             {
-                ImGui.TableSetupColumn("Color", ImGuiTableColumnFlags.WidthStretch, 8, 0);
-                ImGui.TableSetupColumn("Name", ImGuiTableColumnFlags.WidthStretch, 25, 1);
-                ImGui.TableSetupColumn("Keybind", ImGuiTableColumnFlags.WidthStretch, 29, 2);
-                ImGui.TableSetupColumn("Actions", ImGuiTableColumnFlags.WidthStretch, 24, 3);
-                ImGui.TableSetupColumn("Move", ImGuiTableColumnFlags.WidthStretch, 14, 4);
+                ImGui.TableSetupColumn("颜色", ImGuiTableColumnFlags.WidthStretch, 8, 0);
+                ImGui.TableSetupColumn("名称", ImGuiTableColumnFlags.WidthStretch, 25, 1);
+                ImGui.TableSetupColumn("快捷键", ImGuiTableColumnFlags.WidthStretch, 29, 2);
+                ImGui.TableSetupColumn("动作", ImGuiTableColumnFlags.WidthStretch, 24, 3);
+                ImGui.TableSetupColumn("移动", ImGuiTableColumnFlags.WidthStretch, 14, 4);
 
                 ImGui.TableSetupScrollFreeze(0, 1);
                 ImGui.TableHeadersRow();
@@ -388,7 +388,7 @@ namespace TPie.Config
                             Plugin.ShowRingSettingsWindow(RingWindowPos, ring);
                         }
                         ImGui.PopFont();
-                        DrawHelper.SetTooltip("Edit Elements");
+                        DrawHelper.SetTooltip("编辑组件");
 
                         ImGui.SameLine();
                         ImGui.SetCursorPosX(ImGui.GetCursorPosX() - 3 * _scale);
@@ -399,7 +399,7 @@ namespace TPie.Config
                             ImGui.SetClipboardText(exportString);
                         }
                         ImGui.PopFont();
-                        DrawHelper.SetTooltip("Export to clipboard");
+                        DrawHelper.SetTooltip("导出到剪贴板");
 
                         ImGui.SameLine();
                         ImGui.SetCursorPosX(ImGui.GetCursorPosX() - 3 * _scale);
@@ -409,7 +409,7 @@ namespace TPie.Config
                             _removingRing = ring;
                         }
                         ImGui.PopFont();
-                        DrawHelper.SetTooltip("Delete");
+                        DrawHelper.SetTooltip("删除");
                     }
 
                     // move
@@ -433,7 +433,7 @@ namespace TPie.Config
                             }
                         }
                         ImGui.PopFont();
-                        DrawHelper.SetTooltip("Move up");
+                        DrawHelper.SetTooltip("上移");
 
                         ImGui.SameLine();
                         ImGui.SetCursorPosX(ImGui.GetCursorPosX() - 3 * _scale);
@@ -455,7 +455,7 @@ namespace TPie.Config
                             }
                         }
                         ImGui.PopFont();
-                        DrawHelper.SetTooltip("Move down");
+                        DrawHelper.SetTooltip("下移");
                     }
                 }
 
@@ -464,7 +464,7 @@ namespace TPie.Config
 
             if (_removingRing != null)
             {
-                var (didConfirm, didClose) = DrawHelper.DrawConfirmationModal("Delete?", $"Are you sure you want to delete \"{_removingRing.Name}\"");
+                var (didConfirm, didClose) = DrawHelper.DrawConfirmationModal("删除？", $"你确定要删除 \"{_removingRing.Name}\" 环吗？");
 
                 if (didConfirm)
                 {

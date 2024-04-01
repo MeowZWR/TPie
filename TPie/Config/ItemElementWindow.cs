@@ -59,7 +59,7 @@ namespace TPie.Config
             if (ItemElement == null) return;
 
             ImGui.PushItemWidth(240 * _scale);
-            if (ImGui.InputText("Name ##Item", ref _inputText, 100) || _needsSearch)
+            if (ImGui.InputText("名称 ##Item", ref _inputText, 100) || _needsSearch)
             {
                 SearchItems(_inputText);
                 _needsSearch = false;
@@ -67,10 +67,10 @@ namespace TPie.Config
 
             FocusIfNeeded();
 
-            ImGui.Checkbox("In Inventory", ref _onlyInIventory);
+            ImGui.Checkbox("仅物品栏存在的", ref _onlyInIventory);
 
             ImGui.SameLine();
-            ImGui.Checkbox("High Quality", ref _hq);
+            ImGui.Checkbox("高品质", ref _hq);
 
             ImGui.BeginChild("##Items_List", new Vector2(284 * _scale, 170 * _scale), true);
             {

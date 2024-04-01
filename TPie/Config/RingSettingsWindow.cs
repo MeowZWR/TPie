@@ -64,13 +64,13 @@ namespace TPie.Config
             {
                 ImGui.PushItemWidth(310 * _scale);
 
-                if (ImGui.InputText("Name ##Ring_Info_Name", ref Ring.Name, 100))
+                if (ImGui.InputText("名称 ##Ring_Info_Name", ref Ring.Name, 100))
                 {
                     WotsitHelper.Instance?.Update();
                 }
 
                 Vector3 color = new Vector3(Ring.Color.X, Ring.Color.Y, Ring.Color.Z);
-                if (ImGui.ColorEdit3("Color ##Ring_Info_Color", ref color))
+                if (ImGui.ColorEdit3("颜色 ##Ring_Info_Color", ref color))
                 {
                     Ring.Color = new Vector4(color.X, color.Y, color.Z, 1);
                 }
@@ -82,25 +82,25 @@ namespace TPie.Config
 
                 ImGui.SameLine();
                 ImGui.SetCursorPosX(ImGui.GetCursorPosX() - 4);
-                ImGui.Text("Keybind");
+                ImGui.Text("快捷键");
 
                 ImGui.PushItemWidth(128 * _scale);
-                ImGui.DragFloat("Radius ##Ring_Info_Radius", ref Ring.Radius, 1, 150, 500);
+                ImGui.DragFloat("环半径 ##Ring_Info_Radius", ref Ring.Radius, 1, 150, 500);
 
                 ImGui.SameLine();
-                ImGui.DragFloat("Rotation ##Ring_Info_Rotation", ref Ring.Rotation, .5f, -359, 359);
+                ImGui.DragFloat("旋转 ##Ring_Info_Rotation", ref Ring.Rotation, .5f, -359, 359);
 
                 ImGui.PushItemWidth(310 * _scale);
-                ImGui.DragFloat2("Items Size ##Ring_Info_ItemSize", ref Ring.ItemSize, 1, 10, 500);
+                ImGui.DragFloat2("图标尺寸 ##Ring_Info_ItemSize", ref Ring.ItemSize, 1, 10, 500);
 
-                ImGui.Checkbox("Line", ref Ring.DrawLine);
-
-                ImGui.SameLine();
-                ImGui.Checkbox("Selection Background", ref Ring.DrawSelectionBackground);
+                ImGui.Checkbox("指示线", ref Ring.DrawLine);
 
                 ImGui.SameLine();
-                ImGui.Checkbox("Tooltips", ref Ring.ShowTooltips);
-                DrawHelper.SetTooltip("This will show a tooltip with a description of an element when hovering on top of it.");
+                ImGui.Checkbox("选区背景", ref Ring.DrawSelectionBackground);
+
+                ImGui.SameLine();
+                ImGui.Checkbox("鼠标提示", ref Ring.ShowTooltips);
+                DrawHelper.SetTooltip("当鼠标悬停在元件图标上方时，将显示带有元件描述的提示。");
             }
             ImGui.EndChild();
 
@@ -114,10 +114,10 @@ namespace TPie.Config
 
             if (ImGui.BeginTable("##Item_Table", 4, flags, new Vector2(354 * _scale, 242 * _scale)))
             {
-                ImGui.TableSetupColumn("Type", ImGuiTableColumnFlags.WidthStretch, 22, 0);
-                ImGui.TableSetupColumn("Icon", ImGuiTableColumnFlags.WidthStretch, 8, 1);
-                ImGui.TableSetupColumn("Description", ImGuiTableColumnFlags.WidthStretch, 46, 2);
-                ImGui.TableSetupColumn("Quick Action", ImGuiTableColumnFlags.WidthStretch, 24, 3);
+                ImGui.TableSetupColumn("类型", ImGuiTableColumnFlags.WidthStretch, 22, 0);
+                ImGui.TableSetupColumn("图标", ImGuiTableColumnFlags.WidthStretch, 8, 1);
+                ImGui.TableSetupColumn("描述", ImGuiTableColumnFlags.WidthStretch, 46, 2);
+                ImGui.TableSetupColumn("快捷操作", ImGuiTableColumnFlags.WidthStretch, 24, 3);
 
                 ImGui.TableSetupScrollFreeze(0, 1);
                 ImGui.TableHeadersRow();
@@ -188,7 +188,7 @@ namespace TPie.Config
                 ImGui.OpenPopup("##TPie_Add_Item_Menu");
             }
             ImGui.PopFont();
-            DrawHelper.SetTooltip("Add");
+            DrawHelper.SetTooltip("添加");
 
             if (_selectedIndex >= 0)
             {
@@ -199,7 +199,7 @@ namespace TPie.Config
                     ShowEditItemWindow();
                 }
                 ImGui.PopFont();
-                DrawHelper.SetTooltip("Edit");
+                DrawHelper.SetTooltip("编辑");
 
                 ImGui.SetCursorPos(new Vector2(369 * _scale, 290 * _scale));
                 ImGui.PushFont(UiBuilder.IconFont);
@@ -215,7 +215,7 @@ namespace TPie.Config
                     _selectedIndex = -1;
                 }
                 ImGui.PopFont();
-                DrawHelper.SetTooltip("Delete");
+                DrawHelper.SetTooltip("删除");
 
                 int count = Ring.Items.Count;
                 if (count > 0)
@@ -247,7 +247,7 @@ namespace TPie.Config
                         }
                     }
                     ImGui.PopFont();
-                    DrawHelper.SetTooltip("Move up");
+                    DrawHelper.SetTooltip("上移");
 
                     ImGui.SetCursorPos(new Vector2(369 * _scale, 410 * _scale));
                     ImGui.PushFont(UiBuilder.IconFont);
@@ -276,7 +276,7 @@ namespace TPie.Config
                         }
                     }
                     ImGui.PopFont();
-                    DrawHelper.SetTooltip("Move down");
+                    DrawHelper.SetTooltip("下移");
                 }
             }
 
@@ -293,37 +293,37 @@ namespace TPie.Config
             {
                 RingElement? elementToAdd = null;
 
-                if (ImGui.Selectable("Action"))
+                if (ImGui.Selectable("技能"))
                 {
                     elementToAdd = new ActionElement();
                 }
 
-                if (ImGui.Selectable("Item"))
+                if (ImGui.Selectable("道具"))
                 {
                     elementToAdd = new ItemElement();
                 }
 
-                if (ImGui.Selectable("Gear Set"))
+                if (ImGui.Selectable("套装"))
                 {
                     elementToAdd = new GearSetElement();
                 }
 
-                if (ImGui.Selectable("Command"))
+                if (ImGui.Selectable("命令"))
                 {
                     elementToAdd = new CommandElement();
                 }
 
-                if (ImGui.Selectable("Game Macro"))
+                if (ImGui.Selectable("游戏宏"))
                 {
                     elementToAdd = new GameMacroElement();
                 }
 
-                if (ImGui.Selectable("Emote"))
+                if (ImGui.Selectable("表情"))
                 {
                     elementToAdd = new EmoteElement();
                 }
 
-                if (ImGui.Selectable("Nested Ring"))
+                if (ImGui.Selectable("嵌套环"))
                 {
                     elementToAdd = new NestedRingElement();
                 }

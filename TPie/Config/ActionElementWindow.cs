@@ -51,7 +51,7 @@ namespace TPie.Config
             if (ActionElement == null) return;
 
             ImGui.PushItemWidth(210 * _scale);
-            if (ImGui.InputText("ID or Name ##Action", ref _inputText, 100))
+            if (ImGui.InputText("ID 或 名称 ##Action", ref _inputText, 100))
             {
                 SearchActions(_inputText);
             }
