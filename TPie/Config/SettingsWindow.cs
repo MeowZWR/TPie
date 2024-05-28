@@ -33,7 +33,7 @@ namespace TPie.Config
         public SettingsWindow(string name) : base(name)
         {
             Flags = ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoScrollWithMouse;
-            Size = new Vector2(400, 464);
+            Size = new Vector2(400, 470);
 
             _fontSizes = new string[40 - 13];
             for (int i = 14; i <= 40; i++)
@@ -184,7 +184,7 @@ namespace TPie.Config
             // keybinds
             ImGui.Spacing();
             ImGui.Text("快捷键绑定");
-            ImGui.BeginChild("##Keybinds", new Vector2(384 * _scale, 40 * _scale), true);
+            ImGui.BeginChild("##Keybinds", new Vector2(384 * _scale, 64 * _scale), true);
             {
                 ImGui.Checkbox("快捷键透传", ref Settings.KeybindPassthrough);
                 DrawHelper.SetTooltip("如果启用，TPie将不会阻止游戏接收已绑定到环的快捷键。");
@@ -192,13 +192,16 @@ namespace TPie.Config
                 ImGui.SameLine();
                 ImGui.Checkbox("启用快速设置", ref Settings.EnableQuickSettings);
                 DrawHelper.SetTooltip("启用后，打开环时双击鼠标右键将打开该环的设置。");
+
+                ImGui.Checkbox("启用ESC键关闭环", ref Settings.EnableQuickSettings);
+                DrawHelper.SetTooltip("启用后，在打开具有可切换快捷键绑定的环时按ESC键可立即将其关闭。");
             }
             ImGui.EndChild();
 
             // style
             ImGui.Spacing();
             ImGui.Text("样式");
-            ImGui.BeginChild("##Style", new Vector2(384 * _scale, 70 * _scale), true);
+            ImGui.BeginChild("##Style", new Vector2(384 * _scale, 64 * _scale), true);
             {
                 ImGui.Checkbox("绘制环背景   ", ref Settings.DrawRingBackground);
 
@@ -334,7 +337,7 @@ namespace TPie.Config
                 ImGuiTableFlags.SizingFixedSame;
 
             // rings
-            if (ImGui.BeginTable("##Rings_Table", 5, flags, new Vector2(384 * _scale, 354 * _scale)))
+            if (ImGui.BeginTable("##Rings_Table", 5, flags, new Vector2(384 * _scale, 366 * _scale)))
             {
                 ImGui.TableSetupColumn("颜色", ImGuiTableColumnFlags.WidthStretch, 8, 0);
                 ImGui.TableSetupColumn("名称", ImGuiTableColumnFlags.WidthStretch, 25, 1);
