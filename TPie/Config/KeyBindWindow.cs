@@ -63,11 +63,11 @@ namespace TPie.Config
                     Plugin.Settings.ValidateKeyBind(Ring);
                 }
 
-                ImGui.Checkbox("Toggleable", ref keyBind.Toggle);
-                DrawHelper.SetTooltip("When enabled, this keybind will behave as a toggle instead of \"press and hold\".\nOn this mode, once an item is selected, you can either press the keybind again or just click to activate it.");
+                ImGui.Checkbox("可切换", ref keyBind.Toggle);
+                DrawHelper.SetTooltip("启用后，此快捷键将作为切换开关而不是“按住不放”。\n在这种模式下，一旦选择了一个项目，你可以再次按下快捷键或点击来激活它。");
 
                 bool isGlobal = keyBind.IsGlobal;
-                if (ImGui.Checkbox("Use for all jobs", ref isGlobal))
+                if (ImGui.Checkbox("所有职业可用", ref isGlobal))
                 {
                     if (isGlobal)
                     {
@@ -81,10 +81,10 @@ namespace TPie.Config
 
             // jobs
             ImGui.NewLine();
-            ImGui.Text("Use for specific jobs:");
+            ImGui.Text("用于特定职业：");
             ImGui.BeginChild("##KeyBind_Jobs", new Vector2(280 * _scale, 144 * _scale), true);
             {
-                ImGui.Combo("Role", ref _selectedRole, _roleNames, _roleNames.Length);
+                ImGui.Combo("职能", ref _selectedRole, _roleNames, _roleNames.Length);
                 DrawJobs((JobRoles)_selectedRole);
             }
             ImGui.EndChild();
@@ -107,7 +107,7 @@ namespace TPie.Config
                 }
             }
 
-            if (ImGui.Checkbox("All", ref hasAll))
+            if (ImGui.Checkbox("全部", ref hasAll))
             {
                 foreach (uint job in roleJobs)
                 {

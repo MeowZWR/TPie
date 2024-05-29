@@ -118,7 +118,7 @@ namespace TPie.Models
 
             ImGui.PushItemWidth(width);
             ImGui.InputText($"##{id}_Keybind", ref dispKey, 200, ImGuiInputTextFlags.ReadOnly);
-            DrawHelper.SetTooltip("Backspace to clear");
+            DrawHelper.SetTooltip("按键盘退格键进行清除");
 
             if (ImGui.IsItemActive())
             {
